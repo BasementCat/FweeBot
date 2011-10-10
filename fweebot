@@ -1,0 +1,29 @@
+#!/usr/bin/python
+from fwee import daemon, module, config, event, log, core, networking
+from fwee.module import ModuleError
+
+log.info('%s v%s starting up...', core.NAME, core.VERSION)
+log.info('Loading config from %s...', core.CONFIGFILE)
+
+module.refreshList()
+config.load(core.CONFIGFILE)
+
+event.listen('Rehash', networking.handleRehash)
+
+log.info('Loading modules...')
+
+#load modules
+for modname in config.get('Modules', []):
+	try:
+		module.load(modname)
+	except ModuleError as e:
+		log.warning('Failed to load %s: %s', modname, str(e))
+
+core.rehash('[Fwee]', 'Module initialization')
+
+while True:
+	try:
+		event.run()
+		networking.refresh()
+	except KeyboardInterrupt:
+		break

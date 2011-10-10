@@ -1,0 +1,9 @@
+"Modules": ["fweebot", "dice"],
+"Networks": {
+	"Local": {
+		"Servers": ["127.0.0.1"],
+		"Channels": ["#test"],
+		"Nick": "fwee",
+		"Reconnect": 15
+	}
+}
