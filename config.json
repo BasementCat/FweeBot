@@ -1,9 +1,10 @@
-"Modules": ["fweebot", "dice"],
+"Modules": ["fweebot", "dice", "nickserv"],
 "Networks": {
-	"Local": {
-		"Servers": ["127.0.0.1"],
-		"Channels": ["#test"],
-		"Nick": "fwee",
-		"Reconnect": 15
+	"Network1": {
+		"Servers": ["irc.server.com"],
+		"Channels": ["#Channel"],
+		"Nick": "Nick",
+		"Reconnect": 15,
+		"NickServ": "identify password"
 	}
 }
