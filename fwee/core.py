@@ -1,8 +1,10 @@
+import os
 import event, log, config
 
 NAME			=	'Fweebot'
 VERSION			=	'0.1.0'
-CONFIGFILE		=	'config.json'
+CONFIGFILE		=	'fwee.conf'
+CONFIGLOCATIONS	=	['./', os.path.expanduser('~/.fwee/'), '/etc/']
 CONNECTTIMEOUT	=	5.0
 SOCKTIMEOUT		=	0.25
 RECVBUF			=	1024
@@ -11,7 +13,7 @@ DEBUG			=	True
 
 def rehash(who, reason, *args):
 	log.info('Rehash requested by %s: %s', who, (reason%args))
-	config.load(CONFIGFILE)
+	config.loadConfig()
 	event.trigger('Rehash', who, reason)
 
 def dfl(thedict, key, thedefault=None):

@@ -6,7 +6,7 @@ log.info('%s v%s starting up...', core.NAME, core.VERSION)
 log.info('Loading config from %s...', core.CONFIGFILE)
 
 module.refreshList()
-config.load(core.CONFIGFILE)
+config.loadConfig()
 
 event.listen('Rehash', networking.handleRehash)
 
