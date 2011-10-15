@@ -87,7 +87,7 @@ def doAutojoin(evname, net):
 		for channel in net.channels:
 			net.sendf("JOIN %s\r\n", channel)
 
-def handleDisconnect(evname, net, reason):
+def handleDisconnect(evname, net, reason="Could not connect"):
 	log.error("Disconnected from network %s: %s", net.name, reason)
 	if net.reconnect is not None:
 		log.info("%s: reconnecting in %ds", net.name, net.reconnect)
