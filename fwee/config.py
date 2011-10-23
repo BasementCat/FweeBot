@@ -23,6 +23,7 @@ def loadFile(filename):
 	if not config_json.startswith("{"): config_json="{"+config_json+"}"
 	config_data=json.loads(config_json)
 	fh.close()
+	core.LOADEDCONFIG=filename
 
 def get(full_key, default=None):
 	global config_data
