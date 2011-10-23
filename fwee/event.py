@@ -32,6 +32,16 @@ def listen(event, handler, position='last'):
 	else:
 		registered_handlers[event].append(handler)
 
+def unlisten(handler, event=None):
+	global registered_handlers
+	if event is None:
+		for event, handlers in registered_handlers.items():
+			if handler in handlers: registered_handlers[event].remove(handler)
+	else:
+		if registered_handlers.has_key(event):
+			if handler in registered_handlers[event]:
+				registered_handlers[event].remove(handler)
+
 def trigger(full_event, *args, **kwargs):
 	global registered_handlers
 	event_parts=[]

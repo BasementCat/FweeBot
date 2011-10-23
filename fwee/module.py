@@ -70,6 +70,11 @@ class LoadableModule(object):
 			position=position-8
 		return vint
 
+def get(modname):
+	global loaded_modules
+	if not loaded_modules.has_key(modname): raise ModuleError("Module %s is not loaded"%modname)
+	return loaded_modules[modname].ModuleObject
+
 def load(modname):
 	global loaded_modules, available_modules
 	if loaded_modules.has_key(modname):

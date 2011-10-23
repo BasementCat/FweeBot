@@ -66,7 +66,15 @@ def init():
 		event.listen('Network/Incoming/Message/*', printmsgs)
 		event.listen('Network/Incoming/Message/366', handleChannelUserChange)
 
-def cleanup(): pass
+def cleanup():
+	event.unlisten(dispatchMessages)
+	event.unlisten(sendAuthentication)
+	event.unlisten(respondToPing)
+	event.unlisten(setRegistered)
+	event.unlisten(handleDisconnect)
+	event.unlisten(doAutojoin)
+	event.unlisten(handleChannelUserChange)
+	event.unlisten(dispatchCommands)
 
 def printmsgs(evname, net, message):
 	log.edebug('[%s%s] %s', '<<<', net.name, str(message))

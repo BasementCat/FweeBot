@@ -12,7 +12,7 @@ from fwee import event, config, log, core, common
 
 def init(): event.listen("Network/Incoming/Message/*", sendNickServ)
 
-def cleanup(): pass
+def cleanup(): event.unlisten(sendNickServ)
 
 def sendNickServ(evname, net, message):
 	global sendPass

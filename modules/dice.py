@@ -6,7 +6,8 @@ from fwee import event, config, log, core, common
 def init():
 	event.listen('Command/DICE', rollDice)
 
-def cleanup(): pass
+def cleanup():
+	event.unlisten(rollDice)
 
 def rollDice(evname, net, message, args):
 	count, sides=(1, 6)
