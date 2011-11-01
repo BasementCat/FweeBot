@@ -27,6 +27,14 @@ def rollDice(evname, net, message, args):
 		message.reply("Only numbers, please!")
 		return
 	
+	if count < 1:
+		message.reply("Numbers must be equal to or greater than 1!")
+		return
+	
+	if sides < 1:
+		message.reply("Numbers must be equal to or greater than 1!")
+		return
+	
 	log.edebug("Rolling %d dice, %d sides", count, sides)
 	
 	dice=[str(random.randint(1, sides)) for nothing in range(0, count)]
