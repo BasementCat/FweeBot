@@ -50,7 +50,10 @@ def sendNickServ(evname, net, message):
 		sendPass[net.name] = 1
 	
 	if str(chkMessage[0]) == "AuthServ":
+		consoleMessage(net.name, "NickServ entry found in config.json for "+net.name)
 		consoleMessage(net.name, "Sending AuthServ password...")
+		net.send("PRIVMSG AuthServ :"+config.get("Networks/"+net.name+"/NickServ")+"\r\n")
+		sendPass[net.name] = 1
 
 def consoleMessage(server, message):
 	if message is None: return
