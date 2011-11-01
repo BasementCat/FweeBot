@@ -62,6 +62,7 @@ def init():
 	event.listen('Network/Incoming/Message/QUIT', handleChannelUserChange)
 	event.listen('Network/Incoming/Message/KICK', handleChannelUserChange)
 	event.listen('Network/Incoming/Message/PRIVMSG', dispatchCommands)
+	event.listen('Command/XYZZY', zork)
 	if core.DEBUG:
 		event.listen('Network/Incoming/Message/*', printmsgs)
 		event.listen('Network/Incoming/Message/366', handleChannelUserChange)
@@ -75,6 +76,7 @@ def cleanup():
 	event.unlisten(doAutojoin)
 	event.unlisten(handleChannelUserChange)
 	event.unlisten(dispatchCommands)
+	event.unlisten(zork)
 
 def printmsgs(evname, net, message):
 	log.edebug('[%s%s] %s', '<<<', net.name, str(message))
@@ -206,3 +208,6 @@ def dispatchCommands(evname, net, message):
 	match=re.match(r'^'+commandchar+r'(\S+)(?:\s+(.*))?$', message.parameters[-1])
 	if not match: return
 	event.trigger("Command/"+match.group(1).upper(), net=net, message=message, args=parseArguments(match.group(2)))
+
+def zork(evname, net, message):
+	message.reply("Nothing happens.")
