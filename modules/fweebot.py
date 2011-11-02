@@ -45,7 +45,7 @@ class IRCMessage(object):
 	
 	def reply(self, message, *args):
 		if self.network is None: raise Exception("Cannot reply to messages with no network")
-		replyto=self.parameters[0] if self.parameters[0].startswith('#') else self.fromnick
+		replyto=self.parameters[0] if self.parameters[0].startswith('#') else self.fromnick.split("!")[0]
 		self.network.sendf("%s %s :%s\r\n", self.command, replyto, message%args)
 
 def init():
