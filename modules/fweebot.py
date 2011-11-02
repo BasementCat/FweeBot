@@ -204,6 +204,9 @@ def dispatchCommands(evname, net, message):
 	commandchar=config.get('Networks/'+net.name+'/Channels/'+message.parameters[0]+'/CommandChar')
 	if commandchar is None: commandchar=config.get('Networks/'+net.name+'/CommandChar')
 	if commandchar is None: commandchar=config.get('CommandChar', '!')
+	if message.parameters[-1].startswith('?trigger'):
+		message.reply("This bots current trigger is "+commandchar)
+		return
 	#if not message.parameters[-1].startswith(commandchar): return
 	match=re.match(r'^'+commandchar+r'(\S+)(?:\s+(.*))?$', message.parameters[-1])
 	if not match: return
