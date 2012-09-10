@@ -31,7 +31,7 @@ def sendNickServ(evname, net, message):
 		return
 	
 	if config.get("Networks/"+net.name+"/NickServ") == "":
-		console.Message(net.name, "NickServ entry for "+net.name+" is blank. - Bypassing NickServ module.")
+		consoleMessage(net.name, "NickServ entry for "+net.name+" is blank. - Bypassing NickServ module.")
 		event.trigger("Network/Event/AutoJoin", net)
 		sendPass[net.name] = 2
 		return
